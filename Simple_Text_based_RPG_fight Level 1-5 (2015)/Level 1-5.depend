@@ -1,0 +1,43 @@
+# depslib dependency file v1.0
+1674663591 source:d:\it alt\uni\arbeit_git_for_github\simple_text_based_rpg_fight level 1-5\game_compenents\scr\utils.cpp
+	<stdlib.h>
+	"../utils.h"
+
+1674663444 d:\it alt\uni\arbeit_git_for_github\simple_text_based_rpg_fight level 1-5\game_compenents\utils.h
+
+1674667931 source:d:\it alt\uni\arbeit_git_for_github\simple_text_based_rpg_fight level 1-5\game_compenents\scr\classitems.cpp
+	<iostream>
+	<string.h>
+	<stdlib.h>
+	<fstream>
+	"../classItems.h"
+
+1674663670 d:\it alt\uni\arbeit_git_for_github\simple_text_based_rpg_fight level 1-5\game_compenents\classitems.h
+	"classNPC.h"
+
+1674663738 d:\it alt\uni\arbeit_git_for_github\simple_text_based_rpg_fight level 1-5\game_compenents\classnpc.h
+
+1674666273 source:d:\it alt\uni\arbeit_git_for_github\simple_text_based_rpg_fight level 1-5\game_compenents\scr\level.cpp
+	<fstream>
+	<iostream>
+	"../level.h"
+
+1674663662 d:\it alt\uni\arbeit_git_for_github\simple_text_based_rpg_fight level 1-5\game_compenents\level.h
+	"classNPC.h"
+	"classItems.h"
+
+1674664089 source:d:\it alt\uni\arbeit_git_for_github\simple_text_based_rpg_fight level 1-5\main.cpp
+	<iostream>
+	<time.h>
+	<stdlib.h>
+	"Game_compenents/level.h"
+	"Game_compenents/classNPC.h"
+
+1674667959 source:d:\it alt\uni\arbeit_git_for_github\simple_text_based_rpg_fight level 1-5\game_compenents\scr\classnpc.cpp
+	<iostream>
+	<string.h>
+	<stdlib.h>
+	<fstream>
+	"../classNPC.h"
+	"../utils.h"
+

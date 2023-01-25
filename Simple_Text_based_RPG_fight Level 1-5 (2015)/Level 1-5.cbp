@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Small Adventure" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Level 1-5" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Level 1-5" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Entity_Info/Enemies/Geist.txt" />
+		<Unit filename="Entity_Info/Enemies/Ghoul.txt" />
+		<Unit filename="Entity_Info/Enemies/Grabesfürst.txt" />
+		<Unit filename="Entity_Info/Enemies/Skelett.txt" />
+		<Unit filename="Entity_Info/Enemies/Skelettmagier.txt" />
+		<Unit filename="Entity_Info/Hero/held.txt" />
+		<Unit filename="Entity_Info/Items/item1.1.txt" />
+		<Unit filename="Entity_Info/Items/item1.2.txt" />
+		<Unit filename="Entity_Info/Items/item1.3.txt" />
+		<Unit filename="Entity_Info/Items/item2.1.txt" />
+		<Unit filename="Entity_Info/Items/item2.2.txt" />
+		<Unit filename="Entity_Info/Items/item2.3.txt" />
+		<Unit filename="Entity_Info/Items/item3.1.txt" />
+		<Unit filename="Entity_Info/Items/item3.2.txt" />
+		<Unit filename="Entity_Info/Items/item3.3.txt" />
+		<Unit filename="Entity_Info/Items/item4.1.txt" />
+		<Unit filename="Entity_Info/Items/item4.2.txt" />
+		<Unit filename="Entity_Info/Items/item4.3.txt" />
+		<Unit filename="Entity_Info/Level/level1.txt" />
+		<Unit filename="Entity_Info/Level/level2.txt" />
+		<Unit filename="Entity_Info/Level/level3.txt" />
+		<Unit filename="Entity_Info/Level/level4.txt" />
+		<Unit filename="Entity_Info/Level/level5.txt" />
+		<Unit filename="Game_compenents/classItems.h" />
+		<Unit filename="Game_compenents/classNPC.h" />
+		<Unit filename="Game_compenents/level.h" />
+		<Unit filename="Game_compenents/scr/classItems.cpp" />
+		<Unit filename="Game_compenents/scr/classNPC.cpp" />
+		<Unit filename="Game_compenents/scr/level.cpp" />
+		<Unit filename="Game_compenents/scr/utils.cpp" />
+		<Unit filename="Game_compenents/utils.h" />
+		<Unit filename="Level 1-5.layout" />
+		<Unit filename="main.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
