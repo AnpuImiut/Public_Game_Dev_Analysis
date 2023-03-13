@@ -15,6 +15,11 @@ public class WaveCounter : MonoBehaviour
         EventManager.register("SpawnWave", update_wave_counter);
     }
 
+    void OnEnable()
+    {
+        wave_counter = 0;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -27,4 +32,5 @@ public class WaveCounter : MonoBehaviour
         wave_counter += 1;
         transform.GetComponent<TextMeshProUGUI>().text = $"Wave: {wave_counter}";
     }
+
 }

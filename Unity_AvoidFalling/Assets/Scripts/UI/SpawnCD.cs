@@ -17,7 +17,8 @@ public class SpawnCD : MonoBehaviour
         audio_source = transform.GetComponent<AudioSource>();
         // register wave spawning as an event
         EventManager.register("SpawnWave", start_cd);
-        EventManager.register("GameOver", game_over);
+        // EventManager.register("GameOver", state_game_over);
+        // EventManager.register("Play", state_play);
     }
     // FixedUpdate is called once per time step
     void FixedUpdate()
@@ -27,11 +28,16 @@ public class SpawnCD : MonoBehaviour
             transform.GetComponent<TextMeshProUGUI>().fontSize *= 1.02f;
         }
     }
-
-    void game_over()
+    void state_game_over()
     {
         EventManager.unregister("SpawnWave", start_cd);
     }
+
+    void state_play()
+    {
+        EventManager.register("SpawnWave", start_cd);
+    }
+
     void start_cd()
     {
         cd = max_cd;

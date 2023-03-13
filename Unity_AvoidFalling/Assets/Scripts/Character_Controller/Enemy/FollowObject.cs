@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class FollowObject : MonoBehaviour
 {
-    private GameObject follow_target;
+    [SerializeField] private GameObject follow_target = null;
     [SerializeField] private bool intelligent_follow;
     [SerializeField] private float speed;
     private Rigidbody object_rb;
@@ -16,9 +16,8 @@ public class FollowObject : MonoBehaviour
         object_rb = transform.GetComponent<Rigidbody>();
         if(follow_target == null)
         {
-            follow_target = GameObject.Find("Player");
+            follow_target = GameObject.FindWithTag("Player");
         }
-        EventManager.register("GameOver", game_over);
     }
 
     // Update is called once per frame
@@ -46,10 +45,5 @@ public class FollowObject : MonoBehaviour
             is a helpful measure to make the following more smooth */
         float angle = Vector3.Angle(object_rb.velocity, follow_target.transform.position - transform.position);
         object_rb.velocity *= (1 - angle/10000f);
-    }
-
-    void game_over()
-    {
-        Destroy(transform.gameObject);
     }
 }

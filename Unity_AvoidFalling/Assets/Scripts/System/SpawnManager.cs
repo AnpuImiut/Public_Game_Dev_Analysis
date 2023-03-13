@@ -7,8 +7,9 @@ using UnityEngine.EventSystems;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] enemy_type;
-    [SerializeField] GameObject[] power_up_type;
+    [SerializeField] private GameObject[] spawn_on_start;
+    [SerializeField] private GameObject[] enemy_type;
+    [SerializeField] private GameObject[] power_up_type;
     [SerializeField] float[] enemy_spawn_prob;
     private int wave_counter;
     [SerializeField] float spawn_radius;
@@ -23,7 +24,7 @@ public class SpawnManager : MonoBehaviour
         // initialize variables
         wave_counter = 0;
         // register events
-        EventManager.register("SpawnWave", next_wave);
+        EventManager.register("Play", reset);
         EventManager.register("GameOver", game_over);
         EventManager.register("EnemyDestroyed", enemy_destroyed);
     }
@@ -36,6 +37,7 @@ public class SpawnManager : MonoBehaviour
 
     void game_over()
     {
+        CancelInvoke();
         EventManager.unregister("SpawnWave", next_wave);
     }
 
@@ -154,5 +156,17 @@ public class SpawnManager : MonoBehaviour
                         spawn_radius_center + new Vector3(x, 0, z),
                         power_up_type[last_index].transform.rotation);
         audio_source.PlayOneShot(spawn_sound[1], 0.7f);
+    }
+
+    void reset()
+    { 
+        EventManager.register("SpawnWave", next_wave);
+        wave_counter = 0;
+        GameObject tmp = null;
+        foreach(GameObject x in spawn_on_start)
+        {
+            tmp = Instantiate(x, Vector3.zero, x.transform.rotation);
+        }
+        tmp.name = "PowerUpIndicator";
     }
 }

@@ -6,12 +6,10 @@ using UnityEngine;
 
 public class MainControllerX : MonoBehaviour
 {
-    private GameState game_state;
     [SerializeField] private float init_difficulty;
     // Start is called before the first frame update
     void Start()
     {
-        game_state = GameState.Play;
         register_events();
         Invoke("next_wave", 1f);
     }
@@ -37,7 +35,6 @@ public class MainControllerX : MonoBehaviour
     void game_over()
     {
         unregister_events();
-        game_state = GameState.GameOver;
         Invoke("quit_game", 5f);
     }
 

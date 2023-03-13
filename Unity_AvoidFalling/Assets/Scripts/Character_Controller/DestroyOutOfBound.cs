@@ -28,7 +28,7 @@ public class DestroyOutOfBound : MonoBehaviour
             }
             else if(transform.CompareTag("Player"))
             {
-                Destroy(gameObject);
+                EventManager.trigger_event("DestroyPlayer");
                 EventManager.trigger_event("GameOver");
             }
         }

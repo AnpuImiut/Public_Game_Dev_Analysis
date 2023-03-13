@@ -16,6 +16,7 @@ public class GameOverUI : MonoBehaviour
     {
         audio_source = transform.GetComponent<AudioSource>();
         EventManager.register("GameOver", game_over);
+        EventManager.register("Play", reset);
     }
 
     // Update is called once per frame
@@ -26,10 +27,10 @@ public class GameOverUI : MonoBehaviour
 
     void game_over()
     {
-        transform.GetComponent<TextMeshProUGUI>().text = "GAME\nOver";
+        transform.GetComponent<TextMeshProUGUI>().text = "GAME Over\n\nPress (r)eset to restart the game";
         audio_source.PlayOneShot(audio_clip, 0.5f);
         Invoke("font_resize_animation", 0.01f);
-        InvokeRepeating("reverse_font_size_growth", 2.5f, 2.5f);
+        InvokeRepeating("reverse_font_size_growth", 1.5f, 1.5f);
     }
 
     void font_resize_animation()
@@ -41,5 +42,11 @@ public class GameOverUI : MonoBehaviour
     void reverse_font_size_growth()
     {
         grow = -grow;
+    }
+
+    void reset()
+    {
+        CancelInvoke();
+        transform.GetComponent<TextMeshProUGUI>().text = "";
     }
 }

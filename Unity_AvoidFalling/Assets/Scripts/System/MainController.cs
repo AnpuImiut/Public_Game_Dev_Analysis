@@ -4,26 +4,23 @@ using System;
 
 using UnityEngine;
 
-enum GameState
-{
-    Play,
-    GameOver
-}
-
 public class MainController : MonoBehaviour
 {
-    private GameState game_state;
+    private bool in_play;
     // Start is called before the first frame update
     void Start()
     {
-        game_state = GameState.Play;
-        register_events();
-        Invoke("next_wave", 1f);
+        EventManager.register("Play", reset);
+        EventManager.trigger_event("Play");
     }
 
     void Update()
     {
-        
+        // only possible for WEBGL, Standalone ends game
+        if(!in_play && Input.GetKeyDown(KeyCode.R))
+        {
+            EventManager.trigger_event("Play");
+        }
     }
 
     void register_events()
@@ -38,11 +35,22 @@ public class MainController : MonoBehaviour
         EventManager.unregister("WaveClear", next_wave);
     }
 
+    void reset()
+    {
+        register_events();
+        in_play = true;
+        Invoke("next_wave", 1f);
+    }
+
     void game_over()
     {
         unregister_events();
-        game_state = GameState.GameOver;
+        #if UNITY_STANDALONE_WIN && !UNITY_EDITOR
         Invoke("quit_game", 5f);
+        #endif
+        #if UNITY_WEBGL
+        in_play = false;
+        #endif
     }
 
     void quit_game()
