@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private int powered_up;
     [SerializeField] float power_up_strength = 20f;
     [SerializeField] float power_up_time = 4f;
-    [SerializeField] GameObject power_up_indicator;
+    [SerializeField] private GameObject power_up_indicator = null;
     private Rigidbody player_rb;
     [SerializeField] private AudioClip power_up_sound;
     private AudioSource audio_source;
@@ -20,15 +20,27 @@ public class PlayerController : MonoBehaviour
         player_rb = transform.GetComponent<Rigidbody>();
         audio_source = transform.GetComponent<AudioSource>();
         powered_up = 0;
+        EventManager.register("DestroyPlayer", destroy_player);
     }
 
     void Update()
     {
+        if(power_up_indicator == null)
+        {
+            attach_power_up_indicator();
+        }
         move_player();
         if(power_up_indicator.activeSelf)
         {
-            power_up_update_position();
+            power_indicator_update_position();
         }
+    }
+
+    void destroy_player()
+    {
+        power_up_indicator.SetActive(true);
+        Destroy(power_up_indicator);
+        Destroy(gameObject);
     }
 
     void move_player()
@@ -41,7 +53,13 @@ public class PlayerController : MonoBehaviour
         // player_rb.velocity = new Vector3(player_rb.velocity.x * 0.99f, player_rb.velocity.y, player_rb.velocity.z  * 0.99f);
     }
 
-    void power_up_update_position()
+    void attach_power_up_indicator()
+    {
+        power_up_indicator = GameObject.Find("PowerUpIndicator");
+        power_up_indicator.SetActive(false);
+    }
+
+    void power_indicator_update_position()
     {
         power_up_indicator.transform.position = transform.position;
     }

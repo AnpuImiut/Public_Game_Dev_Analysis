@@ -11,7 +11,6 @@ public class PlayerControllerX : MonoBehaviour
     [SerializeField] private bool powered;
     [SerializeField] private int powerUpDuration = 5;
     [SerializeField] private float[] strength; // how hard to hit enemy without and with power-up
-    private bool jumping = false;
     
     void Start()
     {

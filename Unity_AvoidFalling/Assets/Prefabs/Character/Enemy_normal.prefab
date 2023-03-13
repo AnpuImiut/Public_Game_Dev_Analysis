@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5737724192470249287}
   - component: {fileID: 5737724192470248633}
   - component: {fileID: -6053216494784757316}
+  - component: {fileID: 6890632821646175341}
   m_Layer: 0
   m_Name: Enemy_normal
   m_TagString: Enemy
@@ -130,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f7b5b9ee1e2fd42982dd26f0754937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  intelligent_follow: 0
   speed: 20
 --- !u!114 &5737724192470249287
 MonoBehaviour:
@@ -169,3 +171,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: Enemy_normal
+--- !u!114 &6890632821646175341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5737724192470249281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1dc52910ccbbb48b142bff469253ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroy: 1
+  inactivate: 0

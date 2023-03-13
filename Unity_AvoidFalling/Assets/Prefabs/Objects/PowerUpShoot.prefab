@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2611992487271293274}
   - component: {fileID: -1478497745136735446}
   - component: {fileID: 3232153692597874740}
+  - component: {fileID: 1956898153289649547}
   m_Layer: 0
   m_Name: PowerUpShoot
   m_TagString: PowerUp
@@ -128,3 +129,17 @@ MonoBehaviour:
   num_bullets: 12
   push_strength: 20
   forward_offset: 1.2
+--- !u!114 &1956898153289649547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2611992487271253432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1dc52910ccbbb48b142bff469253ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroy: 1
+  inactivate: 0

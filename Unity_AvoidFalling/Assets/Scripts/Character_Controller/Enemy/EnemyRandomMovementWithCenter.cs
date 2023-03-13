@@ -21,7 +21,7 @@ public class EnemyRandomMovementWithCenter : MonoBehaviour
         object_rb = transform.GetComponent<Rigidbody>();
         if(follow_target == null)
         {
-            follow_target = GameObject.Find("Player");
+            follow_target = GameObject.FindWithTag("Player");
         }
         EventManager.register("GameOver", game_over);
         targets = new Vector3[max_random_targets];
