@@ -20,7 +20,8 @@ public class BossController : MonoBehaviour
     {
         enemy_alive = 1;
         transform.GetComponent<SmashAttack>().set_availability(can_smash);
-        player = GameObject.FindWithTag("Player");
+        //player = GameObject.FindWithTag("Player");
+        player = transform.gameObject.GetComponent<FollowObject>().get_follow_target();
         EventManager.register("EnemyDestroyed", enemy_destroyed);
         counter = 1;
     }

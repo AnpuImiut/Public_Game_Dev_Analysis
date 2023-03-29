@@ -23,7 +23,6 @@ public class EnemyRandomMovementWithCenter : MonoBehaviour
         {
             follow_target = GameObject.FindWithTag("Player");
         }
-        EventManager.register("GameOver", game_over);
         targets = new Vector3[max_random_targets];
     }
 
@@ -84,11 +83,6 @@ public class EnemyRandomMovementWithCenter : MonoBehaviour
         {
             loose_control(0.5f);
         }
-    }
-
-    void game_over()
-    {
-        Destroy(transform.gameObject);
     }
 
     void OnCollisionEnter(Collision other) 

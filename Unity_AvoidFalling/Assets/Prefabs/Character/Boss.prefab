@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f7b5b9ee1e2fd42982dd26f0754937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  follow_target: {fileID: 0}
   intelligent_follow: 1
   speed: 60
 --- !u!114 &8156986006588648495
@@ -174,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d43a1cb3dc5034887ad5d6e17d42f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: Boss_MinionMaster
+  id: Boss
 --- !u!114 &5737724193001827149
 MonoBehaviour:
   m_ObjectHideFlags: 0
