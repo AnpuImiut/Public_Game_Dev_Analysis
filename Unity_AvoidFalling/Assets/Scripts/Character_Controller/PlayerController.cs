@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     void destroy_player()
     {
         power_up_indicator.SetActive(true);
+        EventManager.unregister("DestroyPlayer", destroy_player);
         Destroy(power_up_indicator);
         Destroy(gameObject);
     }
@@ -116,7 +117,7 @@ public class PlayerController : MonoBehaviour
                 force_mode = ForceMode.VelocityChange;
                 strength_factor = 0.5f;
                 break;
-            case "Boss_MinionMaster":
+            case "Boss":
                 force_mode = ForceMode.VelocityChange;
                 strength_factor = 0.5f;
                 break;

@@ -18,6 +18,12 @@ public class FollowObject : MonoBehaviour
         {
             follow_target = GameObject.FindWithTag("Player");
         }
+        EventManager.register("DestroyPlayer", follow_object_destroyed);
+    }
+
+    void OnDestroy()
+    {
+        EventManager.unregister("DestroyPlayer", follow_object_destroyed);
     }
 
     // Update is called once per frame
@@ -45,5 +51,15 @@ public class FollowObject : MonoBehaviour
             is a helpful measure to make the following more smooth */
         float angle = Vector3.Angle(object_rb.velocity, follow_target.transform.position - transform.position);
         object_rb.velocity *= (1 - angle/10000f);
+    }
+
+    void follow_object_destroyed()
+    {
+        follow_target = transform.gameObject;
+    }
+
+    public GameObject get_follow_target()
+    {
+        return follow_target;
     }
 }

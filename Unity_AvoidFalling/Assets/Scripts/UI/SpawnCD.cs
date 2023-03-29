@@ -11,7 +11,7 @@ public class SpawnCD : MonoBehaviour
     private int cd;
     [SerializeField] AudioClip[] audio_clips;
     private AudioSource audio_source;
-    // Start is called before the first frame update
+    
     void Start()
     {
         audio_source = transform.GetComponent<AudioSource>();
@@ -20,7 +20,7 @@ public class SpawnCD : MonoBehaviour
         // EventManager.register("GameOver", state_game_over);
         // EventManager.register("Play", state_play);
     }
-    // FixedUpdate is called once per time step
+    
     void FixedUpdate()
     {
         if(cd > 0)
@@ -28,6 +28,13 @@ public class SpawnCD : MonoBehaviour
             transform.GetComponent<TextMeshProUGUI>().fontSize *= 1.02f;
         }
     }
+
+    void OnDisable()
+    {
+        CancelInvoke();
+        reset_cd_object();
+    }
+
     void state_game_over()
     {
         EventManager.unregister("SpawnWave", start_cd);
@@ -45,6 +52,7 @@ public class SpawnCD : MonoBehaviour
         audio_source.PlayOneShot(audio_clips[0], 0.3f);
         Invoke("run_cd", 1f);
     }
+
     void run_cd()
     {
         cd -= 1;
@@ -66,5 +74,13 @@ public class SpawnCD : MonoBehaviour
         {
             transform.GetComponent<TextMeshProUGUI>().text = "";
         }
+    }
+
+    void reset_cd_object()
+    {
+        // stops displaying countdown and reset object for new use
+        cd = 0;
+        transform.GetComponent<TextMeshProUGUI>().text = "";
+        transform.GetComponent<TextMeshProUGUI>().fontSize = 36f;
     }
 }

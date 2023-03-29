@@ -10,10 +10,11 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject[] spawn_on_start;
     [SerializeField] private GameObject[] enemy_type;
     [SerializeField] private GameObject[] power_up_type;
-    [SerializeField] float[] enemy_spawn_prob;
+    [SerializeField] private float[] enemy_spawn_prob;
     private int wave_counter;
+    [SerializeField] private int starting_wave_counter = 0;
     [SerializeField] float spawn_radius;
-    [SerializeField] Vector3 spawn_radius_center;
+    [SerializeField] private Vector3 spawn_radius_center;
     private int enemy_alive;
     [SerializeField] private AudioClip[] spawn_sound;
     private AudioSource audio_source;
@@ -22,7 +23,7 @@ public class SpawnManager : MonoBehaviour
     {
         audio_source = transform.GetComponent<AudioSource>();
         // initialize variables
-        wave_counter = 0;
+        wave_counter = starting_wave_counter;
         // register events
         EventManager.register("Play", reset);
         EventManager.register("GameOver", game_over);
@@ -161,12 +162,13 @@ public class SpawnManager : MonoBehaviour
     void reset()
     { 
         EventManager.register("SpawnWave", next_wave);
-        wave_counter = 0;
+        wave_counter = starting_wave_counter;
         GameObject tmp = null;
         foreach(GameObject x in spawn_on_start)
         {
             tmp = Instantiate(x, Vector3.zero, x.transform.rotation);
         }
         tmp.name = "PowerUpIndicator";
+        EventManager.trigger_event("normal_music"); 
     }
 }

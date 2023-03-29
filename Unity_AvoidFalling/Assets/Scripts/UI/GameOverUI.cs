@@ -35,7 +35,7 @@ public class GameOverUI : MonoBehaviour
 
     void font_resize_animation()
     {
-        transform.GetComponent<TextMeshProUGUI>().fontSize *= 1 + 0.0008f * grow;
+        transform.GetComponent<TextMeshProUGUI>().fontSize *= 1 + 0.0006f * grow;
         Invoke("font_resize_animation", 0.01f);
     }
 
