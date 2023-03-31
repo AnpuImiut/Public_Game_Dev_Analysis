@@ -49,6 +49,7 @@ public class ForceField : MonoBehaviour
             // enemy used smash attack and hits player
             Vector3 dir = (other.transform.position - transform.position).normalized;
             other.transform.GetComponent<Rigidbody>().AddForce(dir * push_strength, ForceMode.VelocityChange);
+            other.gameObject.GetComponent<PlayerController>().loose_full_control();
         }
     }
 
