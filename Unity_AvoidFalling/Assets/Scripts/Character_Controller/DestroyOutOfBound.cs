@@ -20,7 +20,7 @@ public class DestroyOutOfBound : MonoBehaviour
             if(transform.CompareTag("Enemy"))
             {
                 EventManager.trigger_event("EnemyDestroyed");
-                if(transform.name == "Boss")
+                if(transform.name.Contains("Boss"))
                 {
                     EventManager.trigger_event("BossDestroyed");
                 }

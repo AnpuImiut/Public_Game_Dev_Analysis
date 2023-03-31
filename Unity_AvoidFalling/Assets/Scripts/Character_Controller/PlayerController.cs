@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 7f;
+    private bool full_control;
     private int powered_up;
     [SerializeField] float power_up_strength = 20f;
     [SerializeField] float power_up_time = 4f;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
         player_rb = transform.GetComponent<Rigidbody>();
         audio_source = transform.GetComponent<AudioSource>();
         powered_up = 0;
+        full_control = true;
         EventManager.register("DestroyPlayer", destroy_player);
     }
 
@@ -46,12 +48,20 @@ public class PlayerController : MonoBehaviour
 
     void move_player()
     {
+        float movement_penalty = 1.0f;
+        if(Input.GetAxis("Horizontal") != 0.0f && Input.GetAxis("Vertical") != 0.0f)
+        {
+            movement_penalty = 0.5f;
+        }
         // horizontal movement
-        player_rb.AddForce(Vector3.right * Input.GetAxis("Horizontal") * speed, ForceMode.Acceleration);
+        player_rb.AddForce(Vector3.right * Input.GetAxis("Horizontal") * speed * movement_penalty, ForceMode.Acceleration);
         // vertical movement
-        player_rb.AddForce(Vector3.forward * Input.GetAxis("Vertical") * speed, ForceMode.Acceleration);
-        // makes turning more smooth
-        // player_rb.velocity = new Vector3(player_rb.velocity.x * 0.99f, player_rb.velocity.y, player_rb.velocity.z  * 0.99f);
+        player_rb.AddForce(Vector3.forward * Input.GetAxis("Vertical") * speed * movement_penalty, ForceMode.Acceleration);
+        // makes turning more smooth but only if not hit by outside force
+        if(full_control)
+        {
+            player_rb.velocity = new Vector3(player_rb.velocity.x * 0.99f, player_rb.velocity.y, player_rb.velocity.z  * 0.99f);
+        }
     }
 
     void attach_power_up_indicator()
@@ -136,6 +146,17 @@ public class PlayerController : MonoBehaviour
         {
             power_up_indicator.SetActive(false);
         }
+    }
+
+    public void loose_full_control()
+    {
+        full_control = false;
+        Invoke("regain_full_control", 3f);
+    }
+
+    void regain_full_control()
+    {
+        full_control = true;
     }
 
     public int is_powered_up() {return powered_up;}

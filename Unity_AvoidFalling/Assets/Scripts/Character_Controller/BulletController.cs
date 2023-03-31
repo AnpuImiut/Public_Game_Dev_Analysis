@@ -14,6 +14,7 @@ public class BulletController : MonoBehaviour
     {
         bullet_rb = transform.GetComponent<Rigidbody>();
         bullet_rb.velocity = transform.TransformVector(Vector3.up) * speed;
+        allowed_target = "Player";
     }
 
     // Update is called once per frame
@@ -34,6 +35,10 @@ public class BulletController : MonoBehaviour
         {
             Rigidbody object_rb = other.GetComponent<Rigidbody>();
             object_rb.AddForce(bullet_rb.velocity.normalized * push_strength, ForceMode.VelocityChange);
+            if(other.CompareTag("Player"))
+            {
+                other.gameObject.GetComponent<PlayerController>().loose_full_control();
+            }
             Destroy(gameObject);
         }
     }
