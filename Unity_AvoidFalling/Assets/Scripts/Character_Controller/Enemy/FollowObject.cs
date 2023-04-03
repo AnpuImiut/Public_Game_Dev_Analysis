@@ -50,7 +50,7 @@ public class FollowObject : MonoBehaviour
         /*  The angle between current velocity and vector pointing at the target
             is a helpful measure to make the following more smooth */
         float angle = Vector3.Angle(object_rb.velocity, follow_target.transform.position - transform.position);
-        object_rb.velocity *= (1 - angle/10000f);
+        object_rb.velocity *= (1 - angle/3000f);
     }
 
     void follow_object_destroyed()

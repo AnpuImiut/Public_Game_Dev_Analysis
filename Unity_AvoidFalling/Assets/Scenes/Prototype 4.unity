@@ -407,7 +407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &238039080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,7 +435,7 @@ MonoBehaviour:
   - 0.7
   - 0.2
   - 0.1
-  starting_wave_counter: 4
+  starting_wave_counter: 0
   spawn_radius: 8
   spawn_radius_center: {x: 0, y: 0, z: 0}
   spawn_sound:
@@ -790,7 +790,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &265607851
 Transform:
   m_ObjectHideFlags: 0
