@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dd53132a45e3684d973bc085be8a86a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
+  speed: 30
   power_up_strength: 20
   power_up_time: 4
   power_up_indicator: {fileID: 0}
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921e0228233cd042a4805c3cd5537e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_speed: 10
+  max_speed: 8
 --- !u!114 &4374951002093215726
 MonoBehaviour:
   m_ObjectHideFlags: 0

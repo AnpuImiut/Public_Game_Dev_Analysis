@@ -131,8 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f7b5b9ee1e2fd42982dd26f0754937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  follow_target: {fileID: 0}
   intelligent_follow: 0
-  speed: 20
+  speed: 30
 --- !u!114 &5737724192470249287
 MonoBehaviour:
   m_ObjectHideFlags: 0
