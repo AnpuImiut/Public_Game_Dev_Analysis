@@ -10,8 +10,8 @@ public class MusicController : MonoBehaviour
     void Start()
     {
         audio_source = transform.GetComponent<AudioSource>();
-        EventManager.register("normal_music", play_normal_music);
-        EventManager.register("boss_music", play_boss_music);
+        EventManager.register("MusicNormal", play_normal_music);
+        EventManager.register("MusicBoss", play_boss_music);
     }
 
     // Update is called once per frame

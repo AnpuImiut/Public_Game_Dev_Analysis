@@ -4,23 +4,36 @@ using UnityEngine;
 
 public class SmashAttack : MonoBehaviour
 {
-    [SerializeField] private KeyCode button;
-    [SerializeField] private bool player_control;
-    private bool availble = true;
-    private Rigidbody object_rb;
-    [SerializeField] private float jump_strength;
-    [SerializeField] private float falling_strength;
-    [SerializeField] private float push_strength;
+    // Ability variables
     [SerializeField] private float cd;
     [SerializeField] private float smash_prob;
+
+
+    // Control variables
+    [SerializeField] private KeyCode button;
+    [SerializeField] private bool player_control;
+    private Rigidbody object_rb;
+
+
+    // Jumping variables
+    private bool available = true;
     private bool jumping = false;
+    [SerializeField] private float jump_strength;
+    [SerializeField] private float falling_strength;
     [SerializeField] private float max_height;
-    [SerializeField] private GameObject particle_animation;
+    
+
+    // Force-field variables
     [SerializeField] private GameObject force_field;
+    [SerializeField] private float push_strength;
     // size of the force-field expansion
     [SerializeField] private float[] collider_sizes;
+    
+
+    // Others
     [SerializeField] private AudioClip smash_sound;
     private AudioSource audio_source;
+    [SerializeField] private GameObject particle_animation;
 
     void Start()
     {
@@ -30,12 +43,14 @@ public class SmashAttack : MonoBehaviour
 
     void Update()
     {
-        if(availble && !jumping)
+        if(available && !jumping)
         {
+            // player smash attack
             if(player_control && Input.GetKeyDown(button))
             {
                 do_smash_attack();
             }
+            // enemy smash attack
             else if(!player_control && RandomGenerator.get_instance().NextDouble() < smash_prob)
             {
                 do_smash_attack();
@@ -54,6 +69,7 @@ public class SmashAttack : MonoBehaviour
         {
             object_rb.velocity = Vector3.zero;
             object_rb.useGravity = true;
+            // faster falling
             object_rb.AddForce(Vector3.down * falling_strength, ForceMode.Force);
         }
     }
@@ -61,7 +77,7 @@ public class SmashAttack : MonoBehaviour
     void do_smash_attack()
     {
         jumping = true;
-        availble = false;
+        available = false;
         object_rb.useGravity = false;
         object_rb.velocity = Vector3.up * jump_strength;
     }
@@ -75,7 +91,9 @@ public class SmashAttack : MonoBehaviour
         audio_source.PlayOneShot(smash_sound, 0.5f);
     }
 
-    private void OnCollisionEnter(Collision other) {
+    private void OnCollisionEnter(Collision other) 
+    {
+        // on contact with the ground the smash attack enters spawns a force-field
         if(other.gameObject.CompareTag("Ground") && jumping)
         {
             jumping = false;
@@ -84,12 +102,14 @@ public class SmashAttack : MonoBehaviour
             Invoke("reset_availability", cd);
         }
     }
+
     // cool-down on smash attack
     private void reset_availability()
     {
-        availble = true;
+        available = true;
     }
-    // create the actual object that pushes
+
+    // create the force-field that can push objects
     private void create_force_field()
     {
         GameObject tmp = Instantiate(force_field, transform.position, force_field.transform.rotation);
@@ -100,6 +120,5 @@ public class SmashAttack : MonoBehaviour
     public bool is_player_controlled() {return player_control;}
     public float get_push_strength() {return push_strength;}
     public float[] get_collider_sizes() {return collider_sizes;} 
-
-    public void set_availability(bool val) {availble = val;}
+    public void set_availability(bool val) {available = val;}
 }

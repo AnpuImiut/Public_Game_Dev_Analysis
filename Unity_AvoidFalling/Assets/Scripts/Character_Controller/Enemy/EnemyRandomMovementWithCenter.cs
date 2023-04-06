@@ -4,18 +4,30 @@ using System;
 
 using UnityEngine;
 
+
+/* 
+    Controller of enemy type that randomly moves around the player, 
+    making it hard to predict the movement.
+ */
 public class EnemyRandomMovementWithCenter : MonoBehaviour
 {
-    private GameObject follow_target;
-    [SerializeField] private float speed;
+    // Random movement variables
     [SerializeField] private int max_random_targets;
-    [SerializeField] private float radius;
     private Vector3[] targets;
+    [SerializeField] private float radius;
+
+
+    // Control variables
+    [SerializeField] private float speed;
     private int target_count = -1;
-    private float old_dist;
     private bool in_control = true;
+
+
+    // Other variables
+    private float old_dist;
+    private GameObject follow_target;
     private Rigidbody object_rb;
-    // Start is called before the first frame update
+    
     void Start()
     {
         object_rb = transform.GetComponent<Rigidbody>();
@@ -26,7 +38,6 @@ public class EnemyRandomMovementWithCenter : MonoBehaviour
         targets = new Vector3[max_random_targets];
     }
 
-    // Update is called once per frame
     void Update()
     {
         is_falling();
@@ -42,6 +53,7 @@ public class EnemyRandomMovementWithCenter : MonoBehaviour
 
     void init_random_targets()
     {
+        // initiate random target points around follow object
         Vector3 target_pos = follow_target.transform.position;
         for(int i = 0; i < targets.Length; i++)
         {
@@ -53,12 +65,15 @@ public class EnemyRandomMovementWithCenter : MonoBehaviour
             z += Math.Sign(z);
             targets[i] = new Vector3(x, 0.04f, z);
         }
+        // lazy solution to make enemy stop on target points
         target_count = 0;
         old_dist = Vector3.Distance(targets[target_count], transform.position) + 1f;
     }
 
     void move_to_target()
     {
+        // if NPC overshoots target point it new distance will be greater
+        // than the distance measured last frame
         if(old_dist < Vector3.Distance(targets[target_count], transform.position))
         {
             object_rb.velocity = Vector3.zero;
@@ -68,6 +83,7 @@ public class EnemyRandomMovementWithCenter : MonoBehaviour
                 target_count = -1;
             }
         }
+        // as long NPC moves to designated target point, force is applied
         else
         {
             Vector3 dir = (targets[target_count] - transform.position).normalized;
@@ -106,7 +122,6 @@ public class EnemyRandomMovementWithCenter : MonoBehaviour
             if(other.transform.GetComponent<ForceField>().is_player_controlled())
             {
                 loose_control(0.1f);
-                Invoke("regain_control", 4f);
             }
         }
         // contact with bullet: loose control and get pushed
@@ -115,15 +130,16 @@ public class EnemyRandomMovementWithCenter : MonoBehaviour
             if(other.transform.GetComponent<BulletController>().get_target() == "Enemy")
             {
                 loose_control(0.1f);
-                Invoke("regain_control", 4f);
             }
         }
     }
 
+    // make object unable to move on its own until after 4 seconds
     void loose_control(float reduce)
     {
         in_control = false;
         object_rb.velocity = object_rb.velocity * reduce;
+        Invoke("regain_control", 4f);
     }
     void regain_control() {in_control = true;}
 }

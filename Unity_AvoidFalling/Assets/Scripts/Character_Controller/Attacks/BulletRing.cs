@@ -8,18 +8,11 @@ public class BulletRing : MonoBehaviour
     [SerializeField] private int num_bullets;
     [SerializeField] private float push_strength;
     [SerializeField] private float forward_offset;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /*      
+        BulletRing is an attack where X bullets are 
+        evenly spawned around the attacker.                         
+    */
     public void trigger_bullet_ring(string target, Vector3 center_pos)
     {
         float degree_step = 360f / num_bullets;

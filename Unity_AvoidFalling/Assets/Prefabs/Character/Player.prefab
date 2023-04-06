@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921e0228233cd042a4805c3cd5537e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_speed: 8
+  max_speed: 6
 --- !u!114 &4374951002093215726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,17 +269,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7046c1c1cabed1541b415d04a05b7b8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cd: 10
+  smash_prob: 0
   button: 32
   player_control: 1
   jump_strength: 13
   falling_strength: 1000
-  push_strength: 15
-  cd: 10
-  smash_prob: 0
   max_height: 5.5
-  particle_animation: {fileID: 7356900306231791042, guid: 7f0c5fbbd8a191a4296ae4647b9fe67a, type: 3}
   force_field: {fileID: 8107260308402841287, guid: 36bfdf12a80e1d04196f1f0178de749d, type: 3}
+  push_strength: 15
   collider_sizes:
   - 0.5
   - 3.25
   smash_sound: {fileID: 8300000, guid: ae3efad1f499f9143813f3972f7b399f, type: 3}
+  particle_animation: {fileID: 7356900306231791042, guid: 7f0c5fbbd8a191a4296ae4647b9fe67a, type: 3}

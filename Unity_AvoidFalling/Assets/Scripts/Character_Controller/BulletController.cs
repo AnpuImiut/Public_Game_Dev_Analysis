@@ -6,21 +6,14 @@ public class BulletController : MonoBehaviour
 {
     [SerializeField] private float speed;
     private float push_strength = 20f;
-    // variable controlling which target can be pushed
+    // valid target
     private string allowed_target;
     private Rigidbody bullet_rb;
-    // Start is called before the first frame update
+    
     void Start()
     {
         bullet_rb = transform.GetComponent<Rigidbody>();
         bullet_rb.velocity = transform.TransformVector(Vector3.up) * speed;
-        allowed_target = "Player";
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void set_pushStrength_and_target(string target, float push_s)
@@ -35,6 +28,11 @@ public class BulletController : MonoBehaviour
         {
             Rigidbody object_rb = other.GetComponent<Rigidbody>();
             object_rb.AddForce(bullet_rb.velocity.normalized * push_strength, ForceMode.VelocityChange);
+            /* 
+                The player has functionality to make steering smoother by reducing its 
+                velocity slowly. That counteracts being pushed by the bullet. Therefore
+                the player needs to loose control when hit by outer-force.
+             */
             if(other.CompareTag("Player"))
             {
                 other.gameObject.GetComponent<PlayerController>().loose_full_control();

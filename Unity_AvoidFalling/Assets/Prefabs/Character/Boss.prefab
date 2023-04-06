@@ -136,7 +136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_target: {fileID: 0}
-  intelligent_follow: 1
+  smart_follow: 1
+  smart_follow_control: 3500
   speed: 100
 --- !u!114 &8156986006588648495
 MonoBehaviour:

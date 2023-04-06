@@ -6,12 +6,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Control variables
     [SerializeField] private float speed = 7f;
     private bool full_control;
+
+
+    // Power-up variables
     private int powered_up;
     [SerializeField] float power_up_strength = 20f;
     [SerializeField] float power_up_time = 4f;
     [SerializeField] private GameObject power_up_indicator = null;
+
+
+    // Other variables
     private Rigidbody player_rb;
     [SerializeField] private AudioClip power_up_sound;
     private AudioSource audio_source;
@@ -22,7 +29,7 @@ public class PlayerController : MonoBehaviour
         audio_source = transform.GetComponent<AudioSource>();
         powered_up = 0;
         full_control = true;
-        EventManager.register("DestroyPlayer", destroy_player);
+        EventManager.register("PlayerDestroyed", destroy_player);
     }
 
     void Update()
@@ -34,14 +41,15 @@ public class PlayerController : MonoBehaviour
         move_player();
         if(power_up_indicator.activeSelf)
         {
-            power_indicator_update_position();
+            power_up_indicator_update_position();
         }
     }
 
     void destroy_player()
     {
+        EventManager.unregister("PlayerDestroyed", destroy_player);
+        // also destroy the power-up indicator object
         power_up_indicator.SetActive(true);
-        EventManager.unregister("DestroyPlayer", destroy_player);
         Destroy(power_up_indicator);
         Destroy(gameObject);
     }
@@ -70,7 +78,7 @@ public class PlayerController : MonoBehaviour
         power_up_indicator.SetActive(false);
     }
 
-    void power_indicator_update_position()
+    void power_up_indicator_update_position()
     {
         power_up_indicator.transform.position = transform.position;
     }

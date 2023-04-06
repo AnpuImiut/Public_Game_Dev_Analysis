@@ -10,10 +10,16 @@ public class ForceField : MonoBehaviour
     // size of the force-field expansion
     private float[] collider_sizes;
     [SerializeField] private float expand_factor;
-    // Start is called before the first frame update
+    
+    /* 
+        ForceField is an invisible attack that pushes the enemy
+        (player or enemy) with force, possibly of the platform.
+     */
+
     void Start()
     {
-        // control variables. Without parent class this is a invisible attack.
+        // Without a parent class this is a invisible attack
+        // and some control variables are not set.
         player_control = transform.parent.GetComponent<SmashAttack>().is_player_controlled();
         push_strength = transform.parent.GetComponent<SmashAttack>().get_push_strength();
         collider_sizes = transform.parent.GetComponent<SmashAttack>().get_collider_sizes();
@@ -22,31 +28,30 @@ public class ForceField : MonoBehaviour
         sphere_collider.radius = collider_sizes[0];
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        // expand collider until maximum
+        // expand collider until it reaches the maximum
         if(sphere_collider.radius < collider_sizes[1])
         {
             sphere_collider.radius *= expand_factor;
         }
         else{
-            // destroy on max expand
+            // destroy on maximum collider size
             Destroy(gameObject);
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
+        // player used smash attack and hits enemy
         if(other.gameObject.CompareTag("Enemy") && player_control)
         {
-            // player used smash attack and hits enemy
             Vector3 dir = (other.transform.position - transform.position).normalized;
             other.transform.GetComponent<Rigidbody>().AddForce(dir * push_strength, ForceMode.VelocityChange);
         }
+        // enemy used smash attack and hits player
         else if(other.gameObject.CompareTag("Player") && !player_control)
         {
-            // enemy used smash attack and hits player
             Vector3 dir = (other.transform.position - transform.position).normalized;
             other.transform.GetComponent<Rigidbody>().AddForce(dir * push_strength, ForceMode.VelocityChange);
             other.gameObject.GetComponent<PlayerController>().loose_full_control();
