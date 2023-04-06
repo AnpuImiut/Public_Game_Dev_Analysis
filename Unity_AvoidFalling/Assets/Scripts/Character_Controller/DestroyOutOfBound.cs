@@ -6,11 +6,6 @@ using UnityEngine;
 
 public class DestroyOutOfBound : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         // pushing out of ring -> falling -> negative y
@@ -28,11 +23,10 @@ public class DestroyOutOfBound : MonoBehaviour
             }
             else if(transform.CompareTag("Player"))
             {
-                EventManager.trigger_event("DestroyPlayer");
-                EventManager.trigger_event("GameOver");
+                EventManager.trigger_event("PlayerDestroyed");
             }
         }
-        // to catch fast out of the bound objects -> destroy these
+        // to catch out of the bound objects that are fast -> destroy these
         if(Math.Abs(transform.position.x) >= 22f || Math.Abs(transform.position.z) >= 22f)
         {
             if(transform.CompareTag("Enemy"))

@@ -25,13 +25,13 @@ public class MainController : MonoBehaviour
 
     void register_events()
     {
-        EventManager.register("GameOver", game_over);
+        EventManager.register("PlayerDestroyed", game_over);
         EventManager.register("WaveClear", next_wave);
     }
 
     void unregister_events()
     {
-        EventManager.unregister("GameOver", game_over);
+        EventManager.unregister("PlayerDestroyed", game_over);
         EventManager.unregister("WaveClear", next_wave);
     }
 
@@ -44,6 +44,7 @@ public class MainController : MonoBehaviour
 
     void game_over()
     {
+        EventManager.trigger_event("GameOver");
         unregister_events();
         #if UNITY_STANDALONE_WIN && !UNITY_EDITOR
         Invoke("quit_game", 5f);

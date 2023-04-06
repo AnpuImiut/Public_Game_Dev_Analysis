@@ -48,7 +48,7 @@ public class SpawnManager : MonoBehaviour
         if(!Convert.ToBoolean(enemy_alive))
         {
             EventManager.trigger_event("WaveClear");
-            EventManager.trigger_event("normal_music"); 
+            EventManager.trigger_event("MusicNormal"); 
         }
     }
 
@@ -95,7 +95,7 @@ public class SpawnManager : MonoBehaviour
         boss.GetComponent<BossController>().set_boss_difficulty(select_boss_difficulty());
         wave_counter += 1;
         enemy_alive = 1;
-        EventManager.trigger_event("boss_music");
+        EventManager.trigger_event("MusicBoss");
     }
 
     int select_boss_difficulty()
@@ -169,6 +169,6 @@ public class SpawnManager : MonoBehaviour
             tmp = Instantiate(x, Vector3.zero, x.transform.rotation);
         }
         tmp.name = "PowerUpIndicator";
-        EventManager.trigger_event("normal_music"); 
+        EventManager.trigger_event("MusicNormal"); 
     }
 }

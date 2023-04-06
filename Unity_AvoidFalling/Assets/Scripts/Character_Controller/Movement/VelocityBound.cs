@@ -8,13 +8,12 @@ public class VelocityBound : MonoBehaviour
 {
     [SerializeField] private float max_speed;
     private Rigidbody object_rb;
-    // Start is called before the first frame update
+    
     void Start()
     {
         object_rb = transform.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         max_speed_bound();
@@ -25,7 +24,7 @@ public class VelocityBound : MonoBehaviour
         float[] tmp_arr = new float[3];
         float old_y = object_rb.velocity.y;
         // upper bound for speed but only in x- and z-axis
-        // y-axis is unbound for jumping speed
+        // y-axis remains unbound for jumping speed
         for(int i = 0; i < 3; i++)
         {
             if(object_rb.velocity[i] >= 0)

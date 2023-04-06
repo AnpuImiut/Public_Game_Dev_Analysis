@@ -7,37 +7,42 @@ using UnityEngine;
 public class FollowObject : MonoBehaviour
 {
     [SerializeField] private GameObject follow_target = null;
-    [SerializeField] private bool intelligent_follow;
+    // smart tracking improves how the NPC follows the target,
+    // especially handling sharp turns better
+    [SerializeField] private bool smart_follow;
+    [SerializeField] private float smart_follow_control;
     [SerializeField] private float speed;
     private Rigidbody object_rb;
-    // Start is called before the first frame update
+    
     void Start()
     {
         object_rb = transform.GetComponent<Rigidbody>();
+        // This script is only used by enemies, therefore the player is a
+        // viable follow target at all time
         if(follow_target == null)
         {
             follow_target = GameObject.FindWithTag("Player");
         }
-        EventManager.register("DestroyPlayer", follow_object_destroyed);
+        EventManager.register("PlayerDestroyed", follow_object_destroyed);
     }
 
-    void OnDestroy()
-    {
-        EventManager.unregister("DestroyPlayer", follow_object_destroyed);
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if(intelligent_follow)
+        if(smart_follow)
         {
             adjust_targeted_moving();
         }
         move_towards_target();
     }
 
+    void OnDestroy()
+    {
+        EventManager.unregister("PlayerDestroyed", follow_object_destroyed);
+    }
+
     void move_towards_target()
     {
+        // if no follow target exist, not moving is the default behavior
         if(follow_target == null)
         {
             follow_target = transform.gameObject;
@@ -48,9 +53,9 @@ public class FollowObject : MonoBehaviour
     void adjust_targeted_moving()
     {
         /*  The angle between current velocity and vector pointing at the target
-            is a helpful measure to make the following more smooth */
+            is a helpful to make the following more smooth */
         float angle = Vector3.Angle(object_rb.velocity, follow_target.transform.position - transform.position);
-        object_rb.velocity *= (1 - angle/3000f);
+        object_rb.velocity *= (1 - angle/smart_follow_control);
     }
 
     void follow_object_destroyed()
